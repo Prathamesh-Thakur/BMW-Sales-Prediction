@@ -1,6 +1,8 @@
 # :car: BMW Model Price Prediction
 This project aims to predict the price of a BMW car model using a regression model trained on a Kaggle dataset. It includes an engineered feature called a popularity score and provides visualizations of price trends.
 
+Check out the application here: [Link](https://bmw-sales-prediction-opnkyntqtaa447kzrohqu9.streamlit.app/)
+
 # Properties
 * Takes model name, region of sale, color, transmission type, fuel type and engine size to determine final price. 
 
