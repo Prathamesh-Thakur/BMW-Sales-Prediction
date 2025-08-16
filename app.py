@@ -1,15 +1,18 @@
+# Library imports
 import streamlit as st
 import pandas as pd
 import altair as alt
-
-from training import df, le_model, le_region, le_color, le_fuel, le_transmission
-
 import pickle
 
+# Reading the updated dataframe and label encoders
+from training import df, le_model, le_region, le_color, le_fuel, le_transmission
+
+# Reading the unencoded dataset
 df_1 = pd.read_csv("BMW_Car_Sales_Classification.csv", dtype = {"Year": str})
 
 st.write("BMW Sales Price Prediction")
 
+# Input fields
 model_name = st.text_input("Enter the name of the model:")
 
 regions = df_1.Region.unique()
@@ -25,18 +28,24 @@ fuel = st.selectbox("Choose type of fuel:", options = fuel_types)
 
 engine_size = st.number_input("Enter the size of the engine (in litres):")
 
+# Checks the existence of a value in a specific column of the passed dataframe
 def find(colname, dataframe, value):
     df = dataframe[dataframe[colname] == value]
     return df
 
+# Function to predict the price
 def predict_price(row):
     colnames = ['Model', 'Region', 'Fuel_Type', 'Engine_Size_L', 'Transmission', 'Color']
     temp = df
     charts = []
 
     for col in colnames:
+        # Find if the input value of a feature exists in the dataframe
         temp1 = find(col, temp, row[col])
+
+        # If the value exists, it will be a non empty slice of the parent dataframe
         if not temp1.empty:
+            #Code for chart generation in streamlit
             temp_df = df[df[col] == row[col]][['Year', 'Price_USD']]
             sum_df = temp_df.groupby('Year').mean().reset_index()
             sum_df['Year'] = sum_df['Year'].astype(str)
@@ -45,9 +54,11 @@ def predict_price(row):
             charts.append(c)
             temp = temp1
 
+    # Takes the mean of the popularity score from the 5 most recent sales of any matching models
     pop_score = temp.sort_values(by = 'Year', ascending = False).head(5)['Popularity_Score'].mean()
     row['Popularity_Score'] = pop_score
 
+    # Encoding input values for the model
     if row['Model'] in df_1.Model.values:
         row['Model'] = le_model.transform([row['Model']])
 
@@ -84,6 +95,7 @@ st.button("Submit info", on_click = process)
 result_placeholder = st.empty()
 plot_placeholder = st.empty()
 
+# For visual representation
 if 'predicted_price' in st.session_state:
     result_placeholder.write(f"Predicted price of the car: $ {st.session_state['predicted_price']}")
 

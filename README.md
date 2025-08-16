@@ -44,13 +44,13 @@ The project uses a public dataset from Kaggle titled BMW Car Sales Classificatio
   streamlit run app.py
 
 # 🛠️ Requirements
-Python 3.8+
+* Python 3.8+
 
-numpy
+* numpy
 
-pandas
+* pandas
 
-scikit-learn
+* scikit-learn
 
 # 🤝 Contributing
 Contributions are welcome! Please open an issue or submit a pull request if you want to improve the project.
