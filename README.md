@@ -31,17 +31,17 @@ The project uses a public dataset from Kaggle titled BMW Car Sales Classificatio
 
 * Clone the repository:
 
-  git clone [repository-url]
+> git clone [repository-url]
 
-  cd bmw-price-prediction
+> cd bmw-price-prediction
 
 * Install dependencies:
 
-  pip install -r requirements.txt
+> pip install -r requirements.txt
 
 * Run the main script:
 
-  streamlit run app.py
+> streamlit run app.py
 
 # 🛠️ Requirements
 * Python 3.8+
