@@ -2,4 +2,4 @@ numpy
 pandas
 altair
 scikit-learn
-streamlit
+streamlit >= 1.23.0
